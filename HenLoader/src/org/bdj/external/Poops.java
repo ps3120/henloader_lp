@@ -702,6 +702,7 @@ public class Poops {
         } catch (Exception e)
         {
             console.println("exception during stage 1");
+			cleanup();
             return false;
         }
         return true;
@@ -929,6 +930,15 @@ public class Poops {
             NativeInvoke.sendNotificationRequest("Already Jailbroken");
             return 0;
         }
+		try{
+			Thread.sleep(1000);
+		}
+		catch(InterruptedException e){
+			 cons.println("Sleep error");
+			 cleanup();
+			 return -6;
+
+		}
 
         // perform setup
         console.println("Pre-configuration");
