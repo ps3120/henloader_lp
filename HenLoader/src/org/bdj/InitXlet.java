@@ -1,6 +1,7 @@
 package org.bdj;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 import javax.tv.xlet.*;
 import java.awt.BorderLayout;
@@ -83,7 +84,7 @@ public class InitXlet implements Xlet, UserEventListener
                         //InputStream is = getClass().getResourceAsStream("/program.data.bin");
                         //CRunTime.init(is);
     
-                        console.println("Hen Loader LP v1.0, based on:");
+                        console.println("Hen Loader LP v1.1, based on:");
                         console.println("- GoldHEN 2.4b18.7 by SiSTR0");
                         console.println("- poops code by theflow0");
                         console.println("- lapse code by Gezine");
@@ -91,6 +92,21 @@ public class InitXlet implements Xlet, UserEventListener
                         console.println("- java console by sleirsgoevy");
                         console.println("");
                         System.gc(); // this workaround somehow makes Call API working
+                        Socket s = new Socket();
+                        byte[][] byteArrays = new byte[100][];
+                        for (int i = 0; i < 100; i++) {
+                            int size = 0;
+                            if (i < 20)
+                                size = 0x100;
+                            else if (i < 40)
+                                size = 0x200;
+                            else if (i < 60)
+                                size = 0x400;
+                            else
+                                size = 0x1000;
+                            byteArrays[i] = new byte[size];
+                        }
+
                         if (System.getSecurityManager() != null) {
                             console.println("Priviledge escalation failure, unsupported firmware?");
                         } else {
@@ -104,21 +120,22 @@ public class InitXlet implements Xlet, UserEventListener
                                 while (true)
                                 {
                                     int lapseFailCount = 0, c = 0;
-                                    boolean lapseSupported = (!fw.equals("12.50") && !fw.equals("12.52"));
-                                    console.println("\nSelect the mode to run:");
-                                    if (lapseSupported) {
+                                    boolean lapseSupported = (!fw.equals("12.50") && !fw.equals("12.52") && !fw.equals("13.00"));
+                                    //console.println("\nSelect the mode to run:");
+                                    /*if (lapseSupported) {
                                         console.println("* X = Lapse");
                                         console.println("* O = Poops");
                                     } else {
                                         console.println("* X = Poops");
-                                    }
+                                    }*/
                                     
-                                    while ((c != BUTTON_O || !lapseSupported) && c != BUTTON_X)
+                                    /*while ((c != BUTTON_O || !lapseSupported) && c != BUTTON_X)
                                     {
                                         c = pollInput();
-                                    }
-                                    if (c == BUTTON_X && lapseSupported)
+                                    }*/
+                                    if (/*c == BUTTON_X && */lapseSupported)
                                     {
+                                        console.println("Running Lapse");
                                         int result = org.bdj.external.Lapse.main(console);
                                         if (result == 0)
                                         {
@@ -130,9 +147,12 @@ public class InitXlet implements Xlet, UserEventListener
                                             console.println("Fatal fail(" + result + "), please REBOOT PS4");
                                             break;
                                         } else {
-                                            console.println("Failed (" + result + "), but you can try again");
+                                            console.println("Failed (" + result + "), trying again...");
+                                            Thread.sleep(1500);
                                         }
                                     } else {
+                                        console.println("Running Poops");
+                                        Thread.sleep(1000);
                                         int result = org.bdj.external.Poops.main(console);
                                         if (result == 0)
                                         {
