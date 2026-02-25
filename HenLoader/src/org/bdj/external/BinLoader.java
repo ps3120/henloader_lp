@@ -26,7 +26,7 @@ public class BinLoader {
     
     private static final int READ_CHUNK_SIZE = 4096;
     
-    private static final String USBPAYLOAD_RESOURCE = "/disc/BDMV/AUXDATA/aiofix_USBpayload.elf";
+    private static final String USBPAYLOAD_RESOURCE = "/disc/BDMV/AUXDATA/USBpayload.elf";
     
     private static API api;
     private static byte[] binData;
