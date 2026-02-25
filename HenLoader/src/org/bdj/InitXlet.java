@@ -85,11 +85,12 @@ public class InitXlet implements Xlet, UserEventListener
                         //CRunTime.init(is);
     
                         console.println("Hen Loader LP v1.1, based on:");
-                        console.println("- GoldHEN 2.4b18.7 by SiSTR0");
+                        console.println("- GoldHEN by SiSTR0");
                         console.println("- poops code by theflow0");
                         console.println("- lapse code by Gezine");
                         console.println("- BDJ build environment by kimariin");
                         console.println("- java console by sleirsgoevy");
+                        console.println("- Mod by victor (ps3120)");
                         console.println("");
                         System.gc(); // this workaround somehow makes Call API working
                         Socket s = new Socket();
