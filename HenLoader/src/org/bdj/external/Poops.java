@@ -653,6 +653,7 @@ public class Poops {
                     break;
                 }
                 close(kq);
+				Thread.sleep(1);
             }
 
             if (timeout <= 0)
